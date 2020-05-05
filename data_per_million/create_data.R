@@ -1,7 +1,7 @@
 library(tidyverse)
 library(reshape2)
 
-alldata <- read_csv("../../../1_EU_Data/latest_data.csv")
+alldata <- read_csv("../latest_data.csv")
 
 alldata[alldata$countriesAndTerritories == "Eritrea", ]$popData2018 <- 3546000
 
@@ -16,8 +16,8 @@ alldata <- alldata %>%
 
 ## cumulative cases and deaths per million---------
 
-alldata$cum_cases_per_million <- alldata$cumulative_cases / alldata$popData2018
-alldata$cum_deaths_per_million <- alldata$cumulative_deaths / alldata$popData2018
+alldata$cum_cases_per_million <- round(alldata$cumulative_cases / alldata$popData2018, 3)
+alldata$cum_deaths_per_million <- round(alldata$cumulative_deaths / alldata$popData2018, 3)
 
 ## for line chart, convert into days on file and cumulative cases/deaths by country in columns-----------
 
