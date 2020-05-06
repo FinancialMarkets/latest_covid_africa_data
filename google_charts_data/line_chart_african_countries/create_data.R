@@ -14,7 +14,8 @@ alldata$const <- 1
 
 linedata <- alldata %>%
   group_by(countryterritoryCode) %>%
-  arrange(dateRep) %>%
+    arrange(dateRep) %>%
+    filter(cumulative_cases > 2) %>%
   mutate(days_data = cumsum(const)) 
 
 linedata_total_cases <- linedata[, c("days_data", "countriesAndTerritories", "cumulative_cases")]
@@ -28,8 +29,8 @@ cases_data_to_gchart <- dcast(linedata_total_cases, days_data ~ countriesAndTerr
 deaths_data_to_gchart <- dcast(linedata_total_deaths, days_data ~ countriesAndTerritories)
 
 ##change NA to null
-cases_data_to_gchart[is.na(cases_data_to_gchart)] <- "null"
-deaths_data_to_gchart[is.na(deaths_data_to_gchart)] <- "null"
+cases_data_to_gchart[is.na(cases_data_to_gchart)] <- ""
+deaths_data_to_gchart[is.na(deaths_data_to_gchart)] <- ""
 
 
 write_csv(cases_data_to_gchart, "line_chart_cases.csv")
