@@ -32,6 +32,10 @@ deaths_data_to_gchart <- dcast(linedata_total_deaths, days_data ~ countriesAndTe
 cases_data_to_gchart[is.na(cases_data_to_gchart)] <- ""
 deaths_data_to_gchart[is.na(deaths_data_to_gchart)] <- ""
 
+## remove France
+cases_data_to_gchart <- cases_data_to_gchart[, !(names(cases_data_to_gchart) %in% c("France"))]
+deaths_data_to_gchart <- deaths_data_to_gchart[, !(names(deaths_data_to_gchart) %in% c("France"))]
+
 
 write_csv(cases_data_to_gchart, "line_chart_cases.csv")
 write_csv(deaths_data_to_gchart, "line_chart_deaths.csv")
