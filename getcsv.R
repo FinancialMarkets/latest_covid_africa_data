@@ -5,7 +5,7 @@ data <- read_csv("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv")
 
 data$geoId <- tolower(data$geoId)
 
-data[data$countriesAndTerritories == "Eritrea", ]$popData2018 <- 3546000 
+## data[data$countriesAndTerritories == "Eritrea", ]$popData2019 <- 3546000 
 
 write_csv(data, "./latest_data.csv")
 
